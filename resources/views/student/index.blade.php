@@ -4,17 +4,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-
-    {{-- Google Fonts --}}
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
     {{-- Custom Style --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
     <title>Student Database</title>
   </head>
   <body>
@@ -23,9 +20,9 @@
         <div class="col-md-12">
           <div class="card shadow p-5">
             <div class="card-header">
-                <h2 class="text-center pt-3">
+                <h2 class="text-center">
                   {{ __('All Student List') }}
-                  <a href="#" id="click_add_student" class="btn btn-primary float-right" style="padding-top: 10px; padding-bottom: 0px;">
+                  <a href="javascript:void(0)" id="click_add_student" class="btn btn-primary float-right">
                     Add New Student
                   </a>
                 </h2>
@@ -82,7 +79,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body pt-3 pb-4 px-5">
-            <h3 class="text-center py-3">Student Registration</h3>
+            <h3 class="text-center">Student Registration</h3>
             <form method="post">
               @csrf
               <div class="form-group">
@@ -103,10 +100,15 @@
               </div>
               <div class="form-group">
                 <label for="add_modal_student_monthly_donation">Donation</label>
-                <input class="form-control" type="number" id="add_modal_student_monthly_donation" name="monthly_donation" value="{{ old('monthly_donation') }}">
+                <div class="input-group">
+                  <input class="form-control" type="number" id="add_modal_student_monthly_donation" name="monthly_donation" value="{{ old('monthly_donation') }}">
+                  <div class="input-group-append">
+                    <span class="input-group-text">৳</span>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
-                <input class="form-control btn btn-primary" type="submit" value="ADD" style="padding-top: 10px; padding-bottom: 0px;"></input>
+                <input class="form-control btn btn-primary" type="submit" value="ADD"></input>
               </div>
             </form>
           </div>
@@ -120,7 +122,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body pt-3 pb-4 px-5">
-            <h3 class="text-center py-3">Update a Student's Information</h3>
+            <h3 class="text-center">Update a Student's Information</h3>
             <form method="post">
               @csrf
               <div class="form-group">
@@ -144,7 +146,7 @@
                 <input class="form-control" type="number" id="edit_modal_student_monthly_donation" name="monthly_donation">
               </div>
               <div class="form-group">
-                <input class="form-control btn btn-success" type="submit" value="Save Changes" style="padding-top: 10px; padding-bottom: 0px;"></input>
+                <input class="form-control btn btn-success" type="submit" value="Save Changes"></input>
               </div>
             </form>
           </div>
@@ -158,7 +160,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
-            <h3 class="text-center py-3">Student's Information</h3>
+            <h3 class="text-center">Student's Information</h3>
             <table class="table table-hovered">
               <tr>
                 <th>ID</th>
