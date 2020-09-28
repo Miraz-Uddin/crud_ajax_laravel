@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2020 at 04:35 PM
+-- Generation Time: Sep 28, 2020 at 08:15 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -88,6 +88,16 @@ CREATE TABLE `students` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`id`, `name`, `email`, `cell`, `gender`, `monthly_donation`, `created_at`, `updated_at`) VALUES
+(1, 'Miraz Uddin', 'miraz@gmail.com', '01234567891', 0, 786, '2020-09-28 17:53:32', '2020-09-28 17:53:32'),
+(2, 'Rifat Zibraan', 'rifat@gmail.com', '01234567892', 0, 420, '2020-09-28 17:54:43', '2020-09-28 17:54:43'),
+(3, 'Keira Christina Knightley', 'keira@gmail.com', '01234567893', 1, 123425, '2020-09-28 17:56:45', '2020-09-28 17:56:45'),
+(4, 'Thomas Cruise Mapother IV', 'tom@gmail.com', '01234567894', 0, 659, '2020-09-28 18:15:04', '2020-09-28 18:15:04');
+
 -- --------------------------------------------------------
 
 --
@@ -161,7 +171,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

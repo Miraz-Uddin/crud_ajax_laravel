@@ -11,7 +11,7 @@
 
     {{-- Custom Style --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+
     <title>Student Database</title>
   </head>
   <body>
@@ -37,32 +37,37 @@
                           <th class="py-3">Email</th>
                           <th class="py-3">Cell</th>
                           <th class="py-3">Gender</th>
-                          <th class="py-3">Donation</th>
+                          <th class="py-3">Donation (৳)</th>
                           <th class="py-3">Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="all_students_information">
                         @forelse($students as $student)
                         <tr>
-                          <td class="py-3">{{ $student->id }}</td>
-                          <td class="py-3">{{ $student->name }}</td>
-                          <td class="py-3">{{ $student->email }}</td>
-                          <td class="py-3">{{ $student->cell }}</td>
-                          <td class="py-3">{{ $student->gender }}</td>
-                          <td class="py-3">{{ $student->monthly_donation }}</td>
+                          <td class="py-3"><?=$student->id?></td>
+                          <td class="py-3"><?=$student->name?></td>
+                          <td class="py-3"><?=$student->email?></td>
+                          <td class="py-3"><?=$student->cell?></td>
+                          <td class="py-3">
+                            @if($student->gender == 0)
+                              Male
+                            @else
+                              Female
+                            @endif
+                          </td>
+                          <td class="py-3"><?=$student->monthly_donation?></td>
                           <td class="py-3">
                             <div class="btn-group" role="group">
-                              <button type="button" student-id="{{ $student->id }}" id="click_edit_student" class="btn btn-info btn-sm">View</button>
-                              <button type="button" student-id="{{ $student->id }}" id="click_edit_student" class="btn btn-danger btn-sm">Delete</button>
-                              <button type="button" student-id="{{ $student->id }}" id="click_edit_student" class="btn btn-success btn-sm">Edit</button>
+                              <button type="button" student-id="<?=$student->id?>" id="click_edit_student" class="btn btn-info btn-sm">View</button>
+                              <button type="button" student-id="<?=$student->id?>" id="click_edit_student" class="btn btn-danger btn-sm">Delete</button>
+                              <button type="button" student-id="<?=$student->id?>" id="click_edit_student" class="btn btn-success btn-sm">Edit</button>
                             </div>
                           </td>
                         </tr>
                       @empty
                         <tr>
-                          <td colspan="7" class="text-center text-info">
-                            <h5 class="py-3"> No Students' Information has been Registered Yet</h5>
-                          </td>
+                          <td colspan="7" class="py-3 text-info text-center font-weight-bold lead">{{ "NO Students has been registered yet !!!" }}</td>
+                        <tr>
                         </tr>
                       @endforelse
                       </tbody>
@@ -78,39 +83,55 @@
     <div id="add_modal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-body pt-3 pb-4 px-5">
-            <h3 class="text-center">Student Registration</h3>
-            <form method="post">
-              @csrf
-              <div class="form-group">
-                <label for="add_modal_student_name">Name</label>
-                <input class="form-control" type="text" id="add_modal_student_name" name="name" value="{{ old('name') }}">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_email">Email</label>
-                <input class="form-control" type="text" id="add_modal_student_email" name="email" value="{{ old('email') }}">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_cell">Cell</label>
-                <input class="form-control" type="text" id="add_modal_student_cell" name="cell" value="{{ old('cell') }}">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_gender">Gender</label>
-                <input class="form-control" type="text" id="add_modal_student_gender" name="gender" value="{{ old('gender') }}">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_monthly_donation">Donation</label>
-                <div class="input-group">
-                  <input class="form-control" type="number" id="add_modal_student_monthly_donation" name="monthly_donation" value="{{ old('monthly_donation') }}">
-                  <div class="input-group-append">
-                    <span class="input-group-text">৳</span>
-                  </div>
+          <div class="card px-2 py-3">
+              <div class="card-body">
+                <h3 class="text-center">NEW Student's Information</h3>
+                <div class="mt-4">
+                  <div id="add_modal_message"></div>
+                  <form id="add_modal_form">
+                    @csrf
+                    <div class="form-group">
+                      <label for="add_modal_student_name">Name</label>
+                      <input class="form-control" type="text" id="add_modal_student_name" name="name" value="{{ old('name') }}">
+                      <small id="errorForCreatingName" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="add_modal_student_email">Email</label>
+                      <input class="form-control" type="text" id="add_modal_student_email" name="email" value="{{ old('email') }}">
+                      <small id="errorForCreatingEmail" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="add_modal_student_cell">Mobile No.</label>
+                      <input class="form-control" type="text" id="add_modal_student_cell" name="cell" value="{{ old('cell') }}">
+                      <small id="errorForCreatingCell" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="add_modal_student_gender">Gender</label>
+                        <div class="input-group">
+                          <select class="custom-select" type="text" id="add_modal_student_gender" name="gender" value="{{ old('gender') }}">
+                            <option value="" selected>Choose...</option>
+                            <option value="0">MALE</option>
+                            <option value="1">FEMALE</option>
+                          </select>
+                        </div>
+                        <small id="errorForCreatingGender" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="add_modal_student_monthly_donation">Donation</label>
+                      <div class="input-group">
+                        <input class="form-control" type="number" id="add_modal_student_monthly_donation" name="monthly_donation" value="{{ old('monthly_donation') }}">
+                        <div class="input-group-append">
+                          <span class="input-group-text">৳</span>
+                        </div>
+                      </div>
+                        <small id="errorForCreatingMonthlyDonation" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control btn btn-primary" type="submit" value="ADD"></input>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <div class="form-group">
-                <input class="form-control btn btn-primary" type="submit" value="ADD"></input>
-              </div>
-            </form>
           </div>
         </div>
       </div>
@@ -128,6 +149,7 @@
               <div class="form-group">
                 <label for="add_modal_student_name">Name</label>
                 <input class="form-control" type="text" id="edit_modal_student_name" name="name">
+
               </div>
               <div class="form-group">
                 <label for="add_modal_student_email">Email</label>
