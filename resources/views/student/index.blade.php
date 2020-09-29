@@ -37,7 +37,7 @@
                           <th class="py-3">Email</th>
                           <th class="py-3">Cell</th>
                           <th class="py-3">Gender</th>
-                          <th class="py-3">Donation (৳)</th>
+                          <th class="py-3">Donation (tk)</th>
                           <th class="py-3">Actions</th>
                         </tr>
                       </thead>
@@ -92,7 +92,7 @@
                       <div class="input-group">
                         <input class="form-control" type="number" id="add_modal_student_monthly_donation" name="monthly_donation" value="{{ old('monthly_donation') }}">
                         <div class="input-group-append">
-                          <span class="input-group-text">৳</span>
+                          <span class="input-group-text">tk</span>
                         </div>
                       </div>
                         <small id="errorForCreatingMonthlyDonation" class="text-danger"></small>
@@ -152,7 +152,7 @@
                     <div class="input-group">
                       <input class="form-control" type="number" id="edit_modal_student_monthly_donation" name="monthly_donation">
                       <div class="input-group-append">
-                        <span class="input-group-text">৳</span>
+                        <span class="input-group-text">tk</span>
                       </div>
                     </div>
                     <small id="errorForUpdatingMonthlyDonation" class="text-danger"></small>
@@ -171,36 +171,40 @@
 
     {{-- Modal for Viewing a Student's Information Starts --}}
     <div id="view_modal" class="modal fade">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-body">
-            <h3 class="text-center">Student's Information</h3>
-            <table class="table table-hovered">
-              <tr>
-                <th>ID</th>
-                <td>20</td>
-              </tr>
-              <tr>
-                <th>Name</th>
-                <td>Kan Helal</td>
-              </tr>
-              <tr>
-                <th>Email</th>
-                <td>helal.kan@gmail.com</td>
-              </tr>
-              <tr>
-                <th>Cell</th>
-                <td>01715263654</td>
-              </tr>
-              <tr>
-                <th>Gender</th>
-                <td>Male</td>
-              </tr>
-              <tr>
-                <th>Donation</th>
-                <td>150 tk</td>
-              </tr>
-            </table>
+          <div class="card px-2 py-3">
+            <div class="card-body">
+              <h3 class="text-center">Student's Information</h3>
+              <div class="mt-4">
+                <table class="table table-striped">
+                  <tr>
+                    <th>ID</th>
+                    <td id="view_modal_student_id"></td>
+                  </tr>
+                  <tr>
+                    <th>Name</th>
+                    <td id="view_modal_student_name"></td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td id="view_modal_student_email"></td>
+                  </tr>
+                  <tr>
+                    <th>Cell</th>
+                    <td id="view_modal_student_cell"></td>
+                  </tr>
+                  <tr>
+                    <th>Gender</th>
+                    <td id="view_modal_student_gender"></td>
+                  </tr>
+                  <tr>
+                    <th>Donation</th>
+                    <td id="view_modal_student_monthly_donation"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>

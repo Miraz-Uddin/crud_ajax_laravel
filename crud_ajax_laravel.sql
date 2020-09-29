@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2020 at 08:15 PM
+-- Generation Time: Sep 29, 2020 at 05:07 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -93,10 +93,15 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `name`, `email`, `cell`, `gender`, `monthly_donation`, `created_at`, `updated_at`) VALUES
-(1, 'Miraz Uddin', 'miraz@gmail.com', '01234567891', 0, 786, '2020-09-28 17:53:32', '2020-09-28 17:53:32'),
+(1, 'Md. Miraz Uddin', 'miraz@gmail.com', '01234567891', 0, 786, '2020-09-28 17:53:32', '2020-09-29 13:05:28'),
 (2, 'Rifat Zibraan', 'rifat@gmail.com', '01234567892', 0, 420, '2020-09-28 17:54:43', '2020-09-28 17:54:43'),
-(3, 'Keira Christina Knightley', 'keira@gmail.com', '01234567893', 1, 123425, '2020-09-28 17:56:45', '2020-09-28 17:56:45'),
-(4, 'Thomas Cruise Mapother IV', 'tom@gmail.com', '01234567894', 0, 659, '2020-09-28 18:15:04', '2020-09-28 18:15:04');
+(3, 'Keira Knightley', 'keira@gmail.com', '01234567899', 1, 123425, '2020-09-28 17:56:45', '2020-09-29 12:45:01'),
+(4, 'Tom Cruise', 'tom@gmail.com', '01234567894', 0, 659, '2020-09-28 18:15:04', '2020-09-29 12:38:27'),
+(5, 'Alexandra Daddario', 'alexa@gmail.com', '01234567895', 1, 4796, '2020-09-29 07:46:00', '2020-09-29 11:57:47'),
+(6, 'Emma Watson', 'emma@gmail.com', '01234567896', 1, 123, '2020-09-29 07:53:02', '2020-09-29 07:53:02'),
+(7, 'Russel Crow', 'russel@gmail.com', '01234567899', 0, 123, '2020-09-29 07:55:41', '2020-09-29 13:28:56'),
+(8, 'Adam Devine', 'adam@gmail.com', '01234567895', 0, 458, '2020-09-29 13:32:11', '2020-09-29 13:32:11'),
+(9, 'Chris Harrington', 'kit@gmail.com', '01234567896', 0, 12356, '2020-09-29 13:33:40', '2020-09-29 13:47:20');
 
 -- --------------------------------------------------------
 
@@ -171,7 +176,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

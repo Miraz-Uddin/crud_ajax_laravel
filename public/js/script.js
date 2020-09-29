@@ -36,8 +36,8 @@
                <td class="py-3">`+ row.monthly_donation+`</td>
                <td class="py-3">
                  <div class="btn-group" role="group">
-                   <button type="button" student_id="`+ row.id+`" id="click_edit_student" class="btn btn-info btn-sm">View</button>
-                   <button type="button" student_id="`+ row.id+`" id="click_edit_student" class="btn btn-danger btn-sm">Delete</button>
+                   <button type="button" student_id="`+ row.id+`" id="click_view_student" class="btn btn-info btn-sm">View</button>
+                   <button type="button" student_id="`+ row.id+`" id="click_delete_student" class="btn btn-danger btn-sm">Delete</button>
                    <button type="button" student_id="`+ row.id+`" id="click_edit_student" class="btn btn-success btn-sm">Edit</button>
                  </div>
                </td>
@@ -243,6 +243,35 @@
             }
           });
         },
+      });
+    });
+
+    /**
+     ******************************************************************************
+     *****************View a Student's Information*********************************
+     ******************************************************************************
+     */
+    //  Modal Show for clicking VIEW button
+    $(document).on('click','#click_view_student',function(e){
+      e.preventDefault();
+      let student_id = $(this).attr('student_id');
+      $.ajax({
+        url: 'student/'+student_id,
+        method: 'GET',
+        success:function(data){
+          // Get all data from single student's info
+          let gender = (data[0].gender == 0) ? 'Male' : 'Female';
+          $('#view_modal_student_id').text(data[0].id);
+          $('#view_modal_student_name').text(data[0].name);
+          $('#view_modal_student_email').text(data[0].email);
+          $('#view_modal_student_cell').text(data[0].cell);
+          $('#view_modal_student_gender').text(gender);
+          $('#view_modal_student_monthly_donation').text(data[0].monthly_donation+' tk');
+          $('#view_modal').modal('show');
+        },
+        error:function(error){
+          console.log(error);
+        }
       });
     });
   });

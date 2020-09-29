@@ -45,9 +45,14 @@ class StudentController extends Controller
       }
     }
 
-    public function create(){}
-
-    public function show(Student $student){}
+    public function show($id){
+      $student = Student::where('id',$id)->get();
+      if($student){
+          return response()->json($student,200);
+      }else{
+          return response()->json('Student Not Found');
+      }
+    }
 
     public function update(StudentUpdateFormValidate $request, $student_id){
       $student = Student::find($student_id)->update([
@@ -61,4 +66,6 @@ class StudentController extends Controller
     }
 
     public function destroy(Student $student){}
+
+    public function create(){}
 }
