@@ -1,4 +1,4 @@
-<p align="center"><img src="iconForReadMe.png" width="400"></p>
+<p align="center"><img src="https://i.imgur.com/QD4nNQS.png" width="400"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
