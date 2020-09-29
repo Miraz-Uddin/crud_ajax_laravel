@@ -14,17 +14,28 @@
     ******************************************************************************
     */
      function getAllStudentsData(){
+      $('#delete_message').html('');
        $.ajax({
          url: '/getStudentsData',
          method: 'POST',
          cache: false,
          dataType: 'json',
          success: function(dataResult){
-           var resultData = dataResult.data;
-           var all_students_information = '';
-           var i=1;
-           // Creating Foreach Loop to print all data
-           $.each(resultData,function(index,row){
+           if(dataResult.data.length == 0){
+            let empty_message = " No Students' has been Registered Yet ";
+            let all_students_information=`
+             <tr>
+               <td colspan="7">`+ empty_message +`</td>
+             </tr>
+             `;
+             $("#all_students_information").prepend(all_students_information);
+           }else{
+            $("#all_students_information").html('');
+            var resultData = dataResult.data;
+            var all_students_information = '';
+            var i=1;
+            // Creating Foreach Loop to print all data
+            $.each(resultData,function(index,row){
              let gender = (row.gender == 0) ? 'Male' : 'Female';
              all_students_information+=`
              <tr>
@@ -43,8 +54,9 @@
                </td>
              </tr>
              `;
-           });
+            });
            $("#all_students_information").prepend(all_students_information);
+          } 
          }
        });
      }
@@ -65,6 +77,7 @@
       $('#errorForCreatingGender').text('');
       $('#errorForCreatingMonthlyDonation').text('');
       $('#add_modal_message').html('');
+      $('#delete_message').html('');
 
       $('#add_modal').modal('show');
     });
@@ -94,6 +107,7 @@
           `);
           $('#add_modal_form')[0].reset();
           // Adding a New Student's Information
+          getAllStudentsData();
           let gender = '';
           if(data.gender==0){
             gender='Male';
@@ -129,6 +143,7 @@
           $('#errorForCreatingGender').text('');
           $('#errorForCreatingMonthlyDonation').text('');
           $('#add_modal_message').html('');
+          $('#delete_message').html('');
           $.each(error.responseJSON.errors,function(index,value){
             if(index=='name'){
               $('#errorForCreatingName').text(value[0]);
@@ -183,6 +198,7 @@
       $('#errorForUpdatingGender').text('');
       $('#errorForUpdatingMonthlyDonation').text('');
       $('#edit_modal_message').html('');
+      $('#delete_message').html('');
       $('#edit_modal').modal('show');
     });
     // Form Submition By Clicking ADD Button
@@ -225,6 +241,7 @@
           $('#errorForUpdatingGender').text('');
           $('#errorForUpdatingMonthlyDonation').text('');
           $('#edit_modal_message').html('');
+          $('#delete_message').html('');
           $.each(error.responseJSON.errors,function(index,value){
             if(index=='name'){
               $('#errorForUpdatingName').text(value[0]);
@@ -273,6 +290,41 @@
           console.log(error);
         }
       });
+    });
+
+    /**
+     ******************************************************************************
+     *****************Delete a Student's Information*******************************
+     ******************************************************************************
+     */
+    //  Modal Show for clicking DELETE button
+    $(document).on('click','#click_delete_student',function(e){
+      e.preventDefault();
+      let student_id = $(this).attr('student_id');
+      let confirm_message = confirm('Are You Sure ?');
+      if(confirm_message){
+        $.ajax({
+          url: 'student/'+student_id,
+          method: 'DELETE',
+          success: function(data){
+            $("#all_students_information").html('');
+            getAllStudentsData();
+            $('#delete_message').html(`
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong> `+ data +` </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            `);
+          },
+          error:function(error){
+            console.log(error);
+          }
+        });
+      }else{
+          getAllStudentsData();
+      }
     });
   });
 })(jQuery)

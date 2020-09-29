@@ -20,31 +20,29 @@
         <div class="col-md-12">
           <div class="card shadow p-5">
             <div class="card-header">
-                <h2 class="text-center">
-                  {{ __('All Student List') }}
-                  <a href="javascript:void(0)" id="click_add_student" class="btn btn-primary float-right">
-                    Add New Student
-                  </a>
-                </h2>
-                </div>
-                <div class="card-body">
-                  {{-- All Students' Information Starts --}}
-                    <table class="table table-hovered">
-                      <thead>
-                        <tr>
-                          <th class="py-3">#</th>
-                          <th class="py-3">Name</th>
-                          <th class="py-3">Email</th>
-                          <th class="py-3">Cell</th>
-                          <th class="py-3">Gender</th>
-                          <th class="py-3">Donation (tk)</th>
-                          <th class="py-3">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="all_students_information"></tbody>
-                    </table>
-                    {{-- All Students' Information Ends --}}
-                </div>
+              <h2 class="text-center">{{ __('All Student List') }}
+                <a href="javascript:void(0)" id="click_add_student" class="btn btn-primary float-right">Add New Student</a>
+              </h2>
+            </div>
+            <div id="delete_message"></div>
+            <div class="card-body">
+              {{-- All Students' Information Starts --}}
+              <table class="table table-hovered">
+                <thead>
+                  <tr>
+                    <th class="py-3">#</th>
+                    <th class="py-3">Name</th>
+                    <th class="py-3">Email</th>
+                    <th class="py-3">Cell</th>
+                    <th class="py-3">Gender</th>
+                    <th class="py-3">Donation (tk)</th>
+                    <th class="py-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="all_students_information"></tbody>
+              </table>
+              {{-- All Students' Information Ends --}}
+            </div>
           </div>
         </div>
       </div>

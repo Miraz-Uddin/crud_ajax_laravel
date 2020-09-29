@@ -65,7 +65,14 @@ class StudentController extends Controller
       return response()->json($student);
     }
 
-    public function destroy(Student $student){}
+    public function destroy($student_id){
+        $student = Student::where('id',$student_id)->delete();
+        if($student){
+            return response()->json(" A Student's Information has been Deleted ");
+        }else{
+            return response()->json('Student Not Found');
+        }
+    }
 
     public function create(){}
 }
