@@ -41,36 +41,7 @@
                           <th class="py-3">Actions</th>
                         </tr>
                       </thead>
-                      <tbody id="all_students_information">
-                        @forelse($students as $student)
-                        <tr>
-                          <td class="py-3"><?=$student->id?></td>
-                          <td class="py-3"><?=$student->name?></td>
-                          <td class="py-3"><?=$student->email?></td>
-                          <td class="py-3"><?=$student->cell?></td>
-                          <td class="py-3">
-                            @if($student->gender == 0)
-                              Male
-                            @else
-                              Female
-                            @endif
-                          </td>
-                          <td class="py-3"><?=$student->monthly_donation?></td>
-                          <td class="py-3">
-                            <div class="btn-group" role="group">
-                              <button type="button" student-id="<?=$student->id?>" id="click_edit_student" class="btn btn-info btn-sm">View</button>
-                              <button type="button" student-id="<?=$student->id?>" id="click_edit_student" class="btn btn-danger btn-sm">Delete</button>
-                              <button type="button" student-id="<?=$student->id?>" id="click_edit_student" class="btn btn-success btn-sm">Edit</button>
-                            </div>
-                          </td>
-                        </tr>
-                      @empty
-                        <tr>
-                          <td colspan="7" class="py-3 text-info text-center font-weight-bold lead">{{ "NO Students has been registered yet !!!" }}</td>
-                        <tr>
-                        </tr>
-                      @endforelse
-                      </tbody>
+                      <tbody id="all_students_information"></tbody>
                     </table>
                     {{-- All Students' Information Ends --}}
                 </div>
@@ -142,35 +113,56 @@
     <div id="edit_modal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-body pt-3 pb-4 px-5">
-            <h3 class="text-center">Update a Student's Information</h3>
-            <form method="post">
-              @csrf
-              <div class="form-group">
-                <label for="add_modal_student_name">Name</label>
-                <input class="form-control" type="text" id="edit_modal_student_name" name="name">
-
+          <div class="card px-2 py-3">
+            <div class="card-body">
+              <h3 class="text-center">Update Student's Information</h3>
+              <div class="mt-4">
+                <div id="edit_modal_message"></div>
+                <form id="edit_modal_form">
+                  @csrf
+                  <input type="hidden" id="edit_modal_student_id" name="id">
+                  <div class="form-group">
+                    <label for="add_modal_student_name">Name</label>
+                    <input class="form-control" type="text" id="edit_modal_student_name" name="name">
+                    <small id="errorForUpdatingName" class="text-danger"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="add_modal_student_email">Email</label>
+                    <input class="form-control" type="text" id="edit_modal_student_email" name="email">
+                    <small id="errorForUpdatingEmail" class="text-danger"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="add_modal_student_cell">Cell</label>
+                    <input class="form-control" type="text" id="edit_modal_student_cell" name="cell">
+                    <small id="errorForUpdatingCell" class="text-danger"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="add_modal_student_gender">Gender</label>
+                    <div class="input-group">
+                      <select class="custom-select" type="text" id="edit_modal_student_gender" name="gender">
+                        <option value="" selected>Choose...</option>
+                        <option value="0">MALE</option>
+                        <option value="1">FEMALE</option>
+                      </select>
+                    </div>
+                    <small id="errorForUpdatingGender" class="text-danger"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="add_modal_student_monthly_donation">Donation</label>
+                    <div class="input-group">
+                      <input class="form-control" type="number" id="edit_modal_student_monthly_donation" name="monthly_donation">
+                      <div class="input-group-append">
+                        <span class="input-group-text">৳</span>
+                      </div>
+                    </div>
+                    <small id="errorForUpdatingMonthlyDonation" class="text-danger"></small>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control btn btn-success" type="submit" value="Save Changes"></input>
+                  </div>
+                </form>
               </div>
-              <div class="form-group">
-                <label for="add_modal_student_email">Email</label>
-                <input class="form-control" type="text" id="edit_modal_student_email" name="email">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_cell">Cell</label>
-                <input class="form-control" type="text" id="edit_modal_student_cell" name="cell">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_gender">Gender</label>
-                <input class="form-control" type="text" id="edit_modal_student_gender" name="gender">
-              </div>
-              <div class="form-group">
-                <label for="add_modal_student_monthly_donation">Donation</label>
-                <input class="form-control" type="number" id="edit_modal_student_monthly_donation" name="monthly_donation">
-              </div>
-              <div class="form-group">
-                <input class="form-control btn btn-success" type="submit" value="Save Changes"></input>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -215,15 +207,11 @@
     </div>
     {{-- Modal for Viewing a Student's Information Ends --}}
 
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {{-- jQuery first, then Popper.js, then Bootstrap JS --}}
     <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/script.js') }}">
-
-    </script>
+    {{-- Custom JavaScript --}}
+    <script src="{{ asset('js/script.js') }}"></script>
   </body>
 </html>
